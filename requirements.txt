@@ -1,1 +1,3 @@
 rich>=13.0
+openai
+python-dotenv
