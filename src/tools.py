@@ -16,7 +16,21 @@ def write_file(path , content):
     return f'Wrote {path}'
 
 def edit_file(path , old , new , allow_multi_edit=False):
-    pass
+    with open(path) as f:
+        content = f.read()
+
+    # Counting how many times the `old` string
+    # appears in content
+    count = content.count(old)
+    if count == 0:
+        return f'Error: was not found in {path}'
+    if count > 1 and not allow_multi_edit:
+        return f'Error: {count} times in {path}, set `allow_multi_edit` to replace them all.'
+
+    with open(path , 'w') as f:
+        f.write(content.replace(old , new))
+    
+    return f'Replaced {count} match(es) in {path}'
 
 
 TOOL_SCHEMAS = [
