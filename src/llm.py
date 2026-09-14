@@ -21,11 +21,4 @@ def call_llm(messages , tools=None):
         tools=tools
     )
 
-    message = response.choices[0].message
-    completion_details = response.usage.completions_tokens_details
-    prompt_details = response.usage.prompt_tokens_details
-
-    # usage logger
-    
-
-    return message
+    return response.choices[0].message
