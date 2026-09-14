@@ -23,6 +23,7 @@ MAX_TOOL_OUTPUT_LINES = 14
 class UI:
     def __init__(self):
         self.console = Console(highlight=False)
+        self._usage_totals = {}
 
     def banner(self):
         """Render a compact, atmospheric session header."""
@@ -99,6 +100,39 @@ class UI:
                 title=Text("TOOL", style=f"bold {RED}"),
                 title_align="left",
                 border_style=MUTED,
+                style=f"on {MIDNIGHT}",
+                padding=(0, 1),
+            )
+        )
+
+    def usage(self, stats):
+        """Render per-request token usage and retain session totals."""
+        if not stats:
+            return
+
+        values = []
+        for key, value in stats.items():
+            if value is None:
+                continue
+            self._usage_totals[key] = self._usage_totals.get(key, 0) + value
+            label = key.replace("_tokens", "").replace("_", " ")
+            values.append(f"{label} {value:,}")
+
+        if not values:
+            return
+
+        total = sum(self._usage_totals.values())
+        self.console.print(
+            Panel(
+                Text.assemble(
+                    ("this turn  ", f"bold {MUTED}"),
+                    ("  ·  ".join(values), TEXT),
+                    ("\nall turns  ", f"bold {MUTED}"),
+                    (f"{total:,} tokens", f"bold {BRIGHT_BLUE}"),
+                ),
+                title=Text("USAGE", style=f"bold {BLUE}"),
+                title_align="left",
+                border_style=f"dim {MUTED}",
                 style=f"on {MIDNIGHT}",
                 padding=(0, 1),
             )

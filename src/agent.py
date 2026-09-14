@@ -16,7 +16,7 @@ messages = [
 
 while True:
     with ui.working():
-        message = call_llm(messages)
+        message, usage = call_llm(messages)
     messages.append(message.model_dump(exclude_none=True))
 
     if message.content:
@@ -27,7 +27,7 @@ while True:
         break
 
     # invoke tool calls
-    for tool_call in message.tool_calls:
+    for tool_call in message.tool_calls or []:
         args = json.loads(tool_call.function.arguments)
         result = TOOLS[tool_call.function.name](**args)
         
@@ -38,3 +38,5 @@ while True:
             'tool_call_id': tool_call.id,
             'content': result
         })
+
+    ui.usage(usage)
