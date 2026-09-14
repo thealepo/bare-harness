@@ -11,7 +11,9 @@ def read_file(path):
         return f.read()
 
 def write_file(path , content):
-    pass
+    with open(path) as f:
+        f.write(content)
+    return f'Wrote {path}'
 
 def edit_file(path , old , new , allow_multi_edit=False):
     pass
