@@ -11,7 +11,7 @@ messages = [
 ]
 
 while True:
-    message = call_llm(user_input)
+    message = call_llm(messages)
     messages.append(message.model_dump(exclude_none=True))
 
     if message.content:

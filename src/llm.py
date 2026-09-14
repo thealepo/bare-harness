@@ -4,6 +4,7 @@ import os
 from openai import OpenAI
 
 from . import config
+from .tools import TOOL_SCHEMAS
 
 client = OpenAI(
     base_url=config.BASE_URL,
@@ -18,11 +19,11 @@ Use the bash tool to inspect files.
 Answer back to user once exploration is done.
 """  # TODO
 
-def call_llm(messages , tools=None):
+def call_llm(messages):
     response = client.chat.completions.create(
         model=config.MODEL,
         messages=messages,
-        tools=tools
+        tools=TOOL_SCHEMAS
     )
 
     return response.choices[0].message
