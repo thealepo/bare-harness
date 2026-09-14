@@ -28,8 +28,8 @@ class UI:
     def banner(self):
         """Render a compact, atmospheric session header."""
         title = Text.assemble(
-            ("BLUECODE", f"bold {BRIGHT_BLUE}"),
-            ("  //  AGENTIC SYSTEM", f"bold {TEXT}"),
+            ("NEON", f"bold {BRIGHT_BLUE}"),
+            ("  //  AGENTIC CODING HARNESS", f"bold {TEXT}"),
         )
         subtitle = Text("minimal harness  ·  online", style=MUTED)
         self.console.print()
