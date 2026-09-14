@@ -29,7 +29,7 @@ class UI:
         """Render a compact, atmospheric session header."""
         title = Text.assemble(
             ("BLUECODE", f"bold {BRIGHT_BLUE}"),
-            ("  //  SYSTEM", f"bold {TEXT}"),
+            ("  //  AGENTIC SYSTEM", f"bold {TEXT}"),
         )
         subtitle = Text("minimal harness  ·  online", style=MUTED)
         self.console.print()
