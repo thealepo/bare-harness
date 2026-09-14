@@ -7,7 +7,8 @@ def bash(command):
     return result.stdout + result.stderr
 
 def read_file(path):
-    pass
+    with open(path) as f:
+        return f.read()
 
 def write_file(path , content):
     pass
