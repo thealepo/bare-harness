@@ -22,3 +22,8 @@ def call_llm(messages , tools=None):
     )
 
     return response.choices[0].message
+
+if __name__ == "__main__":
+    user_input = input('Enter your prompt> ')
+
+    call_llm(user_input)
