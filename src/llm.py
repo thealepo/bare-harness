@@ -6,13 +6,17 @@ from openai import OpenAI
 from . import config
 
 client = OpenAI(
-    bare_url=config.BASE_URL,
+    base_url=config.BASE_URL,
     api_key=config.API_KEY,
 )
 
 
 # System prompt
-SYSTEM_PROMPT = f"""."""  # TODO
+SYSTEM_PROMPT = f"""
+You are a coding agent. Your job is to code.
+Use the bash tool to inspect files.
+Answer back to user once exploration is done.
+"""  # TODO
 
 def call_llm(messages , tools=None):
     response = client.chat.completions.create(
