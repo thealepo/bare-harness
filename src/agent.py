@@ -1,7 +1,7 @@
 import json
 
-from llm import SYSTEM_PROMPT , call_llm
-from tools import TOOLS
+from .llm import SYSTEM_PROMPT , call_llm
+from .tools import TOOLS
 
 user_input = input('Enter your prompt> ')
 
